@@ -2,7 +2,7 @@
 //  SceneDelegate.swift
 //  pokedex2
 //
-//  Created by Diplomado on 17/11/23.
+//  Created by Tere Durán on 17/11/23.
 //
 
 import UIKit
@@ -19,7 +19,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         
         let window = UIWindow(windowScene: scene)
-        window.rootViewController = PokemonListTableViewController()
+        let pokemonListViewController = PokemonListTableViewController(style: .insetGrouped)
+        let navigationController = UINavigationController(rootViewController: pokemonListViewController)
+        window.rootViewController = navigationController
         window.makeKeyAndVisible()
         
         self.window = window
