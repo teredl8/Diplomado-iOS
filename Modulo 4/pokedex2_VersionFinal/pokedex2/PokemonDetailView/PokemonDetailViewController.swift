@@ -2,7 +2,7 @@
 //  PokemonDetailViewController.swift
 //  pokedex2
 //
-//  Created by Tere Durán on 17/11/23.
+//  Created by Alejandro Mendoza on 17/11/23.
 //
 
 import UIKit
@@ -13,16 +13,13 @@ class PokemonDetailViewController: UIViewController {
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-//        scrollView.backgroundColor = .blue
         
         return scrollView
     }()
     
-    // lazy - hace que se construya la variable hasta que se ocupe
     private lazy var contentView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-//        view.backgroundColor = .purple
         
         return view
     }()
@@ -32,9 +29,11 @@ class PokemonDetailViewController: UIViewController {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
         
+        imageView.image = UIImage(systemName: "dog")
+        
         NSLayoutConstraint.activate([
             imageView.heightAnchor.constraint(equalToConstant: 100),
-            imageView.widthAnchor.constraint(equalToConstant: 100)
+            imageView.widthAnchor.constraint(equalToConstant: 100),
         ])
         
         return imageView
@@ -48,10 +47,10 @@ class PokemonDetailViewController: UIViewController {
         
         label.text = viewModel.pokemonNumber
         
-        return label 
+        return label
     }()
     
-    private lazy var pokemonHeightLabel: UILabel = {
+    private lazy var pokemonHeight: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.preferredFont(forTextStyle: .title1)
@@ -62,7 +61,7 @@ class PokemonDetailViewController: UIViewController {
         return label
     }()
     
-    private lazy var pokemonWeightLabel: UILabel = {
+    private lazy var pokemonWeight: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.preferredFont(forTextStyle: .title1)
@@ -73,19 +72,34 @@ class PokemonDetailViewController: UIViewController {
         return label
     }()
     
+    private lazy var pokemonWeaknesses: [UILabel] = {
+        return viewModel.pokemonWeaknesses.map { weakness in
+            let label = UILabel()
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.font = UIFont.preferredFont(forTextStyle: .title1)
+            label.adjustsFontForContentSizeCategory = true
+            
+            label.text = weakness
+            
+            return label
+        }
+    }()
+    
     private lazy var pokemonLocationButton: UIButton = {
         var buttonConfiguration = UIButton.Configuration.filled()
         buttonConfiguration.title = viewModel.locationButtonTitle
         
         let pokemonLocationButton = UIButton(configuration: buttonConfiguration)
-        pokemonLocationButton.addTarget(self, action: #selector(pokemonLocationButtonPressed), for: .touchUpOutside)
+        pokemonLocationButton.addTarget(self, 
+                                        action: #selector(pokemonLocationButtonPressed),
+                                        for: .touchUpInside)
         return pokemonLocationButton
     }()
     
     init(pokemon: Pokemon) {
         viewModel = PokemonDetailViewModel(pokemon: pokemon)
-        
         super.init(nibName: nil, bundle: nil)
+        
         viewModel.delegate = self
     }
     
@@ -104,13 +118,9 @@ class PokemonDetailViewController: UIViewController {
         view.backgroundColor = .systemBackground
         
         view.addSubview(scrollView)
+        
         scrollView.addSubview(contentView)
         
-//        let redView = UIView()
-//        redView.translatesAutoresizingMaskIntoConstraints = false
-//        redView.backgroundColor = .red
-//
-//        contentView.addSubview(redView)
         
         let contentViewHeightAnchor = contentView.heightAnchor.constraint(equalTo: scrollView.heightAnchor)
         contentViewHeightAnchor.isActive = true
@@ -122,18 +132,14 @@ class PokemonDetailViewController: UIViewController {
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
-            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor ),
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             
-//            redView.topAnchor.constraint(equalTo: contentView.topAnchor),
-//            redView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-//            redView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-//            redView.widthAnchor.constraint(equalToConstant: 100),
-//            redView.heightAnchor.constraint(equalToConstant: 5000)
         ])
+        
         
         let pokemonInfoStackView = UIStackView()
         pokemonInfoStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -143,16 +149,11 @@ class PokemonDetailViewController: UIViewController {
         
         pokemonInfoStackView.addArrangedSubview(pokemonImageView)
         pokemonInfoStackView.addArrangedSubview(pokemonNumberLabel)
-        pokemonInfoStackView.addArrangedSubview(pokemonHeightLabel)
-        pokemonInfoStackView.addArrangedSubview(pokemonWeightLabel)
+        pokemonInfoStackView.addArrangedSubview(pokemonHeight)
+        pokemonInfoStackView.addArrangedSubview(pokemonWeight)
         
-        for weakness in viewModel.pokemonWeaknesses {
-            let pokemonWeaknessLabel = UILabel()
-            pokemonWeaknessLabel.translatesAutoresizingMaskIntoConstraints = false
-            pokemonWeaknessLabel.font = UIFont.preferredFont(forTextStyle: .title1)
-            pokemonWeaknessLabel.adjustsFontForContentSizeCategory = true
-            pokemonWeaknessLabel.text = weakness
-            pokemonInfoStackView.addArrangedSubview(pokemonWeaknessLabel)
+        for weakness in pokemonWeaknesses {
+            pokemonInfoStackView.addArrangedSubview(weakness)
         }
         
         pokemonInfoStackView.addArrangedSubview(pokemonLocationButton)
@@ -165,13 +166,17 @@ class PokemonDetailViewController: UIViewController {
             pokemonInfoStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             pokemonInfoStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
         ])
+        
     }
     
     @objc
-    func pokemonLocationButtonPressed(){
-        let pokemonLocationViewController = PokemonLocationViewController()
+    func pokemonLocationButtonPressed() {
+        let pokemonLocationViewController = PokemonLocationViewController(pokemon: viewModel.pokemon)
         present(pokemonLocationViewController, animated: true)
     }
+    
+
+
 }
 
 extension PokemonDetailViewController: PokemonDetailViewModelDelegate {

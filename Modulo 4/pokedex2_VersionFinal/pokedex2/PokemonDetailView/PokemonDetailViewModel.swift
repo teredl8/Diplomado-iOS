@@ -2,8 +2,8 @@
 //  PokemonDetailViewModel.swift
 //  pokedex2
 //
-//  Created by Tere Durán on 17/11/23.
-//
+//  Created by Alejandro Mendoza on 17/11/23.
+//x
 
 import UIKit
 
@@ -12,15 +12,15 @@ protocol PokemonDetailViewModelDelegate: AnyObject {
 }
 
 class PokemonDetailViewModel {
-    private let pokemon: Pokemon
+    let pokemon: Pokemon
     
     var pokemonName: String { pokemon.name }
     var pokemonNumber: String { pokemon.number }
-    var pokemonHeight: String { pokemon.height }
+    var pokemonHeight: String  { pokemon.height }
     var pokemonWeight: String { pokemon.weight }
     var pokemonWeaknesses: [String] { pokemon.weaknesses }
     
-    let locationButtonTitle = "View Pokemon Location"
+    let locationButtonTitle = "View Pokemon location"
     
     weak var delegate: PokemonDetailViewModelDelegate?
     
@@ -40,6 +40,7 @@ class PokemonDetailViewModel {
                 DispatchQueue.main.async {
                     self?.delegate?.updatePokemonImage(to: pokemonImage)
                 }
+                
             }
         }
     }

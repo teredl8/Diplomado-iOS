@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		557C55DF2B093E9F0028A290 /* PokemonLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557C55DE2B093E9F0028A290 /* PokemonLocationViewModel.swift */; };
+		557C55E12B093EB30028A290 /* PokemonLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557C55E02B093EB30028A290 /* PokemonLocationViewController.swift */; };
 		55E3311F2B08237F0043748C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E3311E2B08237F0043748C /* AppDelegate.swift */; };
 		55E331212B08237F0043748C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E331202B08237F0043748C /* SceneDelegate.swift */; };
 		55E331232B08237F0043748C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E331222B08237F0043748C /* ViewController.swift */; };
@@ -42,6 +44,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		557C55DE2B093E9F0028A290 /* PokemonLocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonLocationViewModel.swift; sourceTree = "<group>"; };
+		557C55E02B093EB30028A290 /* PokemonLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonLocationViewController.swift; sourceTree = "<group>"; };
 		55E3311B2B08237F0043748C /* pokedex2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pokedex2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55E3311E2B08237F0043748C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		55E331202B08237F0043748C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -88,6 +92,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		557C55DD2B093E750028A290 /* PokemonLocationView */ = {
+			isa = PBXGroup;
+			children = (
+				557C55DE2B093E9F0028A290 /* PokemonLocationViewModel.swift */,
+				557C55E02B093EB30028A290 /* PokemonLocationViewController.swift */,
+			);
+			path = PokemonLocationView;
+			sourceTree = "<group>";
+		};
 		55E331122B08237F0043748C = {
 			isa = PBXGroup;
 			children = (
@@ -111,6 +124,7 @@
 		55E3311D2B08237F0043748C /* pokedex2 */ = {
 			isa = PBXGroup;
 			children = (
+				557C55DD2B093E750028A290 /* PokemonLocationView */,
 				55E331592B08471C0043748C /* PokemonDetailView */,
 				55E331562B0846D40043748C /* PokemonListView */,
 				55E3311E2B08237F0043748C /* AppDelegate.swift */,
@@ -300,6 +314,8 @@
 				55E3315B2B0847650043748C /* PokemonDetailViewModel.swift in Sources */,
 				55E3315D2B0847AD0043748C /* PokemonDetailViewController.swift in Sources */,
 				55E3314F2B0824060043748C /* PokemonListTableViewController.swift in Sources */,
+				557C55E12B093EB30028A290 /* PokemonLocationViewController.swift in Sources */,
+				557C55DF2B093E9F0028A290 /* PokemonLocationViewModel.swift in Sources */,
 				55E331552B0827920043748C /* Pokemon.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

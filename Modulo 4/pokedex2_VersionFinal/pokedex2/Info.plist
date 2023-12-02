@@ -2,8 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSCameraUsageDescription</key>
+	<string>To take awsome pictures of Pokemon</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>We need this to validate that it is you to view your favotites</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>We want to show you of the Pokemon nearby</string>
+	<string>We wantt to show you the location of the Pokemon nearby</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
